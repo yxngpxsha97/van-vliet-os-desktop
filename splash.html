@@ -13,14 +13,7 @@
   }
   .wrap { text-align: center; animation: rise .5s ease-out both; }
   @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-  .emblem {
-    width: 92px; height: 92px; margin: 0 auto 22px; border-radius: 22px;
-    background: linear-gradient(160deg, #16273f, #0c1a2e);
-    border: 1px solid rgba(255,255,255,.06);
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 18px 50px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.05);
-  }
-  .emblem span { font-size: 44px; font-weight: 900; letter-spacing: -.04em; color: #ED6A1C; }
+  .emblem { width: 124px; height: auto; margin: 4px auto 20px; display: block; filter: drop-shadow(0 12px 26px rgba(237,106,28,.22)); }
   .word { font-size: 22px; font-weight: 800; letter-spacing: .01em; }
   .word b { color: #ED6A1C; }
   .os { font-size: 11px; font-weight: 700; letter-spacing: .26em; color: #6b7d93; text-transform: uppercase; margin-top: 6px; }
@@ -34,7 +27,7 @@
 </head>
 <body>
   <div class="wrap">
-    <div class="emblem"><span>VV</span></div>
+    <img class="emblem" src="build/vv-mark-orange.png" alt="Van Vliet" />
     <div class="word">Van&nbsp;Vliet<b>.</b></div>
     <div class="os">Operating System</div>
     <div class="bar"><i></i></div>
