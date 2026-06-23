@@ -9,8 +9,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build:win": "electron-builder --win nsis --x64",
-    "build:mac": "electron-builder --mac dmg --universal"
+    "build:win": "electron-builder --win nsis --x64 --publish never",
+    "build:mac": "electron-builder --mac dmg --universal --publish never"
   },
   "build": {
     "appId": "nl.vanvliet.os",
