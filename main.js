@@ -6,7 +6,8 @@ const { app, BrowserWindow, Menu, shell } = require('electron');
 const path = require('path');
 
 // Where the web app lives. Override with `set VV_URL=...` for local/dev.
-const APP_URL = process.env.VV_URL || 'https://vanvliet.blueprint-solutions.nl';
+// The live VVOS (25-09). The app is a window around the website, so every VVOS deploy reaches it at once.
+const APP_URL = process.env.VV_URL || 'https://van-vliet-os-three.vercel.app';
 const APP_HOST = (() => { try { return new URL(APP_URL).host; } catch { return ''; } })();
 const BRAND_NAVY = '#0c1a2e';
 const ICON = path.join(__dirname, 'build', 'icon.png');
@@ -78,6 +79,18 @@ function createWindow() {
   win.loadURL(APP_URL);
 }
 
-app.whenReady().then(() => { createSplash(); createWindow(); });
+// Updates of the app itself (the shell: window, splash, icon). On Windows it downloads in the background and installs on
+// the next start; the unsigned Mac build can't self-update, so it simply keeps the site current (which is what matters).
+function checkForShellUpdate() {
+  if (process.platform !== 'win32' || !app.isPackaged) return;
+  try {
+    const { autoUpdater } = require('electron-updater');
+    autoUpdater.autoDownload = true;
+    autoUpdater.autoInstallOnAppQuit = true;
+    autoUpdater.checkForUpdates().catch(() => {});
+  } catch { /* updater missing: the site itself is always live anyway */ }
+}
+
+app.whenReady().then(() => { createSplash(); createWindow(); checkForShellUpdate(); });
 app.on('activate', () => { if (BrowserWindow.getAllWindows().length === 0) createWindow(); });
 app.on('window-all-closed', () => { if (process.platform !== 'darwin') app.quit(); });

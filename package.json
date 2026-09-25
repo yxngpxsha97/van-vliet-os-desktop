@@ -1,7 +1,7 @@
 {
   "name": "van-vliet-os-desktop",
   "productName": "Van Vliet OS",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Van Vliet OS — intern besturingssysteem voor Van Vliet | Newwen (desktop-app rondom de web-app).",
   "author": "Van Vliet | Newwen",
   "license": "UNLICENSED",
@@ -16,10 +16,22 @@
     "appId": "nl.vanvliet.os",
     "productName": "Van Vliet OS",
     "copyright": "Van Vliet | Newwen",
-    "directories": { "output": "dist", "buildResources": "build" },
-    "files": ["main.js", "splash.html", "build/icon.png", "build/icon-256.png", "build/vv-mark-orange.png", "!dist/**"],
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "main.js",
+      "splash.html",
+      "build/icon.png",
+      "build/icon-256.png",
+      "build/vv-mark-orange.png",
+      "!dist/**"
+    ],
     "win": {
-      "target": ["nsis"],
+      "target": [
+        "nsis"
+      ],
       "icon": "build/icon.ico",
       "artifactName": "Van-Vliet-OS-Setup.${ext}"
     },
@@ -32,15 +44,29 @@
       "shortcutName": "Van Vliet OS"
     },
     "mac": {
-      "target": ["dmg"],
+      "target": [
+        "dmg"
+      ],
       "icon": "build/icon.png",
       "category": "public.app-category.business",
       "artifactName": "Van-Vliet-OS.${ext}"
     },
-    "dmg": { "title": "Van Vliet OS" }
+    "dmg": {
+      "title": "Van Vliet OS"
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "yxngpxsha97",
+        "repo": "van-vliet-os-desktop"
+      }
+    ]
   },
   "devDependencies": {
     "electron": "^33.3.1",
     "electron-builder": "^25.1.8"
+  },
+  "dependencies": {
+    "electron-updater": "^6.3.9"
   }
 }

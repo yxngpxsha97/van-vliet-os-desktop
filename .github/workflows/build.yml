@@ -35,19 +35,24 @@ jobs:
           path: |
             dist/*.exe
             dist/*.dmg
+            dist/*.blockmap
+            dist/latest*.yml
           if-no-files-found: error
 
   release:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      - id: v
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
       - uses: actions/download-artifact@v4
         with:
           path: artifacts
       - name: Publish release
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v1.0.0
-          name: Van Vliet OS 1.0.0
+          tag_name: v${{ steps.v.outputs.version }}
+          name: Van Vliet OS ${{ steps.v.outputs.version }}
           make_latest: true
           files: artifacts/**/*
